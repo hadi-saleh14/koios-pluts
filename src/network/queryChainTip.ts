@@ -1,4 +1,6 @@
 import { Hash32 } from "@harmoniclabs/plu-ts"
+import { KoiosNetwork } from "../types";
+import { netToDom } from "../utils/netToDom";
 
 export type KoiosChainTip = {
     hash: Hash32,
@@ -9,9 +11,9 @@ export type KoiosChainTip = {
     blockTimestamp: number
 }
 
-export function queryChainTip(): Promise<KoiosChainTip>
+export function queryChainTip( network: KoiosNetwork = "mainnet" ): Promise<KoiosChainTip>
 {
-    return fetch("https://api.koios.rest/api/v0/tip")
+    return fetch(`https://${netToDom(network)}.koios.rest/api/v0/tip`)
         .then( res => res.json() )
         .then( (_res) => {
 

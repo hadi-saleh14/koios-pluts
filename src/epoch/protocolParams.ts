@@ -2,6 +2,8 @@ import { CostModels, ProtocolParamters } from "@harmoniclabs/plu-ts";
 import { isSafeInteger } from "../utils/isSafeInteger";
 import { getCurrentEpoch } from "../utils/getCurrentEpoch";
 import { ExBudget } from "@harmoniclabs/plu-ts/dist/onchain/CEK/Machine/ExBudget";
+import { KoiosNetwork } from "../types";
+import { netToDom } from "../utils/netToDom";
 
 function withAllValuesAsBigInt( obj: any ): any
 {
@@ -48,12 +50,12 @@ function adaptKoiosCostModel( str: string ): CostModels
     return res;
 }
 
-export function getProtocolParameters( epoch: number ): Promise<ProtocolParamters>
+export function getProtocolParameters( epoch: number, network: KoiosNetwork = "mainnet" ): Promise<ProtocolParamters>
 {
-    const currEpoch = getCurrentEpoch();
+    const currEpoch = getCurrentEpoch( network );
     const e = isSafeInteger( epoch ) && epoch < currEpoch && epoch >= 0 ? epoch : currEpoch;
 
-    return fetch(`https://api.koios.rest/api/v0/epoch_params?_epoch_no=${e.toString()}`)
+    return fetch(`https://${netToDom(network)}.koios.rest/api/v0/epoch_params?_epoch_no=${e.toString()}`)
     .then( res => (res.json() as any)[0])
     .then( (res: any) => {
 

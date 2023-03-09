@@ -1,5 +1,31 @@
-export function getCurrentEpoch(): number
+import { KoiosNetwork } from "../types";
+
+export function getCurrentEpoch( network: KoiosNetwork = "mainnet" ): number
 {
+    if( network === "preprod" || network === "testnet" )
+    {
+        return Math.floor(
+            (
+                (
+                    Date.now() -
+                    1654041600_000 // preprod start
+                ) / 86_400_000 // milliseconds in a day
+            ) / 5
+        )
+    }
+
+    if( network === "preview" )
+    {
+        return Math.floor(
+            (
+                (
+                    Date.now() -
+                    1666656000_000 // preview start
+                ) / 86_400_000 // milliseconds in a day
+            ) // / 5 // nope; 1 day per epoch preview
+        )
+    }
+
     return Math.floor(
         (
             (
