@@ -1,0 +1,25 @@
+{
+  "name": "koios-pluts",
+  "version": "0.1.0",
+  "description": "A Koios API wrapper based on plu-ts",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarmonicLabs/koios-pluts.git"
+  },
+  "keywords": [
+    "Cardano"
+  ],
+  "author": "Harmonic Laboratories",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/HarmonicLabs/koios-pluts/issues"
+  },
+  "homepage": "https://github.com/HarmonicLabs/koios-pluts#readme",
+  "dependencies": {
+    "@harmoniclabs/plu-ts": "^0.2.0-dev27"
+  }
+}
