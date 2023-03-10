@@ -64,32 +64,32 @@ export function getProtocolParameters( epoch: number = -1, network: KoiosNetwork
         currEpoch;
 
     return fetch(`https://${netToDom(network)}.koios.rest/api/v0/epoch_params?_epoch_no=${e.toString()}`)
-    .then( res => (res.json() as any)[0])
-    .then( (res: any) => {
-
+    .then( res => res.json())
+    .then( (_res: any) => {
+        const res = _res[0];
         return {
-            txFeePerByte: res.min_fee_a,
-            txFeeFixed: res.min_fee_b,
-            maxBlockBodySize: res.max_block_size,
-            maxTxSize: res.max_tx_size ,
-            maxBlockHeaderSize: res.max_bh_size ,
+            txFeePerByte: res.min_fee_a ?? 0,
+            txFeeFixed: res.min_fee_b ?? 0,
+            maxBlockBodySize: res.max_block_size ?? 0,
+            maxTxSize: res.max_tx_size ?? 0,
+            maxBlockHeaderSize: res.max_bh_size ?? 0,
             stakeAddressDeposit: BigInt( res.key_deposit ) ,
             stakePoolDeposit: BigInt( res.pool_deposit ) ,
-            poolRetireMaxEpoch: res.max_epoch ,
-            stakePoolTargetNum: res.optimal_pool_count ,
-            poolPledgeInfluence: res.influence ,
-            monetaryExpansion: res.monetary_expand_rate ,
-            treasuryCut: res.treasury_growth_rate ,
+            poolRetireMaxEpoch: res.max_epoch  ?? 0,
+            stakePoolTargetNum: res.optimal_pool_count  ?? 0,
+            poolPledgeInfluence: res.influence  ?? 0,
+            monetaryExpansion: res.monetary_expand_rate ?? 0 ,
+            treasuryCut: res.treasury_growth_rate ?? 0 ,
             protocolVersion: {
-                major: res.protocol_major,
-                minor: res.protocol_minor
+                major: res.protocol_major ?? 0,
+                minor: res.protocol_minor ?? 0
             },
-            minPoolCost: BigInt( res.min_pool_cost ) ,
+            minPoolCost: BigInt( res.min_pool_cost ?? 0 ) ,
             utxoCostPerByte: BigInt( res.coins_per_utxo_size ?? 0) ,
             costModels: adaptKoiosCostModel( res.cost_models ?? "{}" ),
             executionUnitPrices: {
-                priceMemory: res.price_mem,
-                priceSteps: res.price_step
+                priceMemory: res.price_mem ?? 0,
+                priceSteps: res.price_step ?? 0
             },
             maxTxExecutionUnits: new ExBudget({
                 mem: res.max_tx_ex_mem ?? 0,
@@ -99,9 +99,9 @@ export function getProtocolParameters( epoch: number = -1, network: KoiosNetwork
                 mem: BigInt( res.max_block_ex_mem ?? 0 ),
                 cpu: BigInt( res.max_block_ex_steps ?? 0)
             }),
-            maxValueSize: res.max_val_size ,
-            collateralPercentage: res.collateral_percent ,
-            maxCollateralInputs: BigInt( res.max_collateral_inputs )
+            maxValueSize: res.max_val_size ?? 0 ,
+            collateralPercentage: res.collateral_percent ?? 0 ,
+            maxCollateralInputs: BigInt( res.max_collateral_inputs ?? 0 )
         } as ProtocolParamters
     })
 }

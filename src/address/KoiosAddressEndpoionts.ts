@@ -20,6 +20,6 @@ export class KoiosAddressEndpoionts
 
     utxos( addrs: AddrLike | AddrLike[] ): Promise<UTxO[]>
     {
-        return getAddressUtxos( addrs )
+        return getAddressUtxos( addrs, this.network )
     }
 }

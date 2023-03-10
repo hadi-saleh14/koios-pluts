@@ -1,6 +1,7 @@
 import { Hash32, Tx } from "@harmoniclabs/plu-ts";
 import { KoiosNetwork } from "../types";
 import { netToDom } from "../utils/netToDom";
+import { KoiosError } from "../errors/KoiosError";
 
 /**
  * 
@@ -21,5 +22,20 @@ export async function submitTx( tx: Tx, network: KoiosNetwork = "mainnet" ): Pro
         },
         body: tx.toCbor().toBuffer().buffer
     })
-    .then( _ => tx.hash )
+    .then(  res =>  {
+
+        if( !res.ok )
+        throw new KoiosError(
+            "error submitting '" + tx.hash.toString() + "' transaction; " +
+            "endpoint used: " + `https://${netToDom(net)}.koios.rest/api/v0/address_info ` +
+            "JSON form of the tranascton: " +
+            JSON.stringify(
+                tx.toJson(),
+                undefined,
+                2
+            )
+        );
+
+        return tx.hash;
+    })
 }

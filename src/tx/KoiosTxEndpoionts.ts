@@ -19,9 +19,9 @@ export class KoiosTxEndpoionts
         return submitTx( tx, this.network );
     }
 
-    waitConfirmed( txHash: CanBeTxHash, nConfirmations?: number ): Promise<void>
+    waitConfirmed( txHash: CanBeTxHash, timeout?: number, nConfirmations?: number, logs?: boolean ): Promise<void>
     {
-        return waitTxConfirmed( txHash, nConfirmations, this.network ) 
+        return waitTxConfirmed( txHash, timeout, nConfirmations, logs, this.network );
     }
 
     status( txns: CanBeTxHash | CanBeTxHash[] ): Promise<TxSatatus[]>
