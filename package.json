@@ -1,5 +1,5 @@
 {
-  "name": "koios-pluts",
+  "name": "@harmoniclabs/koios-pluts",
   "version": "0.1.0",
   "description": "A Koios API wrapper based on plu-ts types",
   "main": "dist/index.js",
