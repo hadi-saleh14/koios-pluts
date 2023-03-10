@@ -1,7 +1,7 @@
 import { Address, AddressStr, Data, Hash28, Hash32, Script, ScriptType, StakeAddress, UTxO, Value, dataFromCbor } from "@harmoniclabs/plu-ts";
 import { KoiosNetwork } from "../types";
 import { netToDom } from "../utils/netToDom";
-import { fromHex } from "@harmoniclabs/plu-ts/dist/uint8Array/index.js";
+import { fromHex } from "@harmoniclabs/uint8array-utils";
 
 export type AddrLike = Address | AddressStr;
 
