@@ -1,8 +1,9 @@
 import { Hash32, Tx } from "@harmoniclabs/plu-ts";
 import { KoiosNetwork } from "../types";
 import { netToDom } from "../utils/netToDom";
+import { isSafeInteger } from "../utils/isSafeInteger";
 
-type CanBeTxHash = Tx | Hash32 | string
+export type CanBeTxHash = Tx | Hash32 | string
 
 export type TxSatatus = {
     txHash: Hash32,
@@ -40,4 +41,31 @@ export async function getTxStatus( txns: CanBeTxHash | CanBeTxHash[], network: K
             nConfirmations: Number( res.num_confirmations ?? 0 )
         };
     }));
+}
+
+const deafultMinConfirm = 20;
+const interval = 5_000;
+
+export async function waitTxConfirmed( txHash: CanBeTxHash, nConfirmations?: number, network: KoiosNetwork = "mainnet" ): Promise<void>
+{
+    const hash = forceHashStr( txHash );
+    const minConfirm =
+        (
+            typeof nConfirmations === "number" && 
+            isSafeInteger( nConfirmations ) && 
+            nConfirmations > 0 
+        ) ? 
+        nConfirmations : 
+        deafultMinConfirm;
+
+    while( true )
+    {
+        if(
+            (await getTxStatus( hash, network ))
+            [0].nConfirmations >= minConfirm 
+        )
+            return
+        
+        await new Promise( res => setTimeout( res, interval ) );
+    }
 }

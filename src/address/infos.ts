@@ -1,9 +1,9 @@
-import { Address, AddressStr, Data, Hash28, Hash32, IValue, Script, ScriptType, StakeAddress, UTxO, Value, dataFromCbor } from "@harmoniclabs/plu-ts";
+import { Address, AddressStr, Data, Hash28, Hash32, Script, ScriptType, StakeAddress, UTxO, Value, dataFromCbor } from "@harmoniclabs/plu-ts";
 import { KoiosNetwork } from "../types";
 import { netToDom } from "../utils/netToDom";
 import { fromHex } from "@harmoniclabs/plu-ts/dist/uint8Array/index.js";
 
-type AddrLike = Address | AddressStr;
+export type AddrLike = Address | AddressStr;
 
 export interface AddressInfos {
     address: Address,

@@ -1,0 +1,31 @@
+import { Hash32, Tx } from "@harmoniclabs/plu-ts";
+import { KoiosNetwork, WithNetwork } from "../types";
+import { defineNetwork } from "../utils/defineNetwork";
+import { CanBeTxHash, TxSatatus, getTxStatus, waitTxConfirmed } from "./getTxStatus";
+import { submitTx } from "./submit";
+
+export class KoiosTxEndpoionts
+    implements WithNetwork
+{
+    readonly network!: KoiosNetwork;
+
+    constructor( network?: KoiosNetwork )
+    {
+        defineNetwork( this, network );
+    }
+
+    submit( tx: Tx ): Promise<Hash32>
+    {
+        return submitTx( tx, this.network );
+    }
+
+    waitConfirmed( txHash: CanBeTxHash, nConfirmations?: number ): Promise<void>
+    {
+        return waitTxConfirmed( txHash, nConfirmations, this.network ) 
+    }
+
+    status( txns: CanBeTxHash | CanBeTxHash[] ): Promise<TxSatatus[]>
+    {
+        return getTxStatus( txns, this.network );
+    }
+}

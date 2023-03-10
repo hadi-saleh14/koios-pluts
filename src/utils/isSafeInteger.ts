@@ -2,7 +2,7 @@
 const MAX_SAFE_INT = 9007199254740991;
 const MIN_SAFE_INT = -9007199254740991
 
-export function isSafeInteger( n: number ): boolean
+export function isSafeInteger( n: any ): boolean
 {
     return (
         typeof n === "number" &&

@@ -50,10 +50,18 @@ function adaptKoiosCostModel( str: string ): CostModels
     return res;
 }
 
-export function getProtocolParameters( epoch: number, network: KoiosNetwork = "mainnet" ): Promise<ProtocolParamters>
+export function getProtocolParameters( epoch: number = -1, network: KoiosNetwork = "mainnet" ): Promise<ProtocolParamters>
 {
     const currEpoch = getCurrentEpoch( network );
-    const e = isSafeInteger( epoch ) && epoch < currEpoch && epoch >= 0 ? epoch : currEpoch;
+    const e = 
+        (
+            typeof epoch === "number" && 
+            isSafeInteger( epoch ) && 
+            epoch < currEpoch && 
+            epoch >= 0 
+        ) ? 
+        epoch : 
+        currEpoch;
 
     return fetch(`https://${netToDom(network)}.koios.rest/api/v0/epoch_params?_epoch_no=${e.toString()}`)
     .then( res => (res.json() as any)[0])

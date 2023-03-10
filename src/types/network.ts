@@ -4,3 +4,7 @@ export type KoiosNetwork
     | "testnet" // preprod
     | "preprod"
     | "preview"
+
+export interface WithNetwork {
+    readonly network: KoiosNetwork
+}
