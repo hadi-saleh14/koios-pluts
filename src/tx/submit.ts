@@ -15,7 +15,7 @@ export async function submitTx( tx: Tx, network: KoiosNetwork = "mainnet" ): Pro
         ( network === "preview" ? "preview" : "preprod" ) :
         "mainnet";
 
-    return fetch(`https://${netToDom(net)}.koios.rest/api/v0/address_info`, {
+    return fetch(`https://${netToDom(net)}.koios.rest/api/v0/submittx`, {
         method: "post",
         headers: {
           'Content-Type': 'application/cbor'
@@ -27,7 +27,7 @@ export async function submitTx( tx: Tx, network: KoiosNetwork = "mainnet" ): Pro
         if( !res.ok )
         throw new KoiosError(
             "error submitting '" + tx.hash.toString() + "' transaction; " +
-            "endpoint used: " + `https://${netToDom(net)}.koios.rest/api/v0/address_info ` +
+            "endpoint used: " + `https://${netToDom(net)}.koios.rest/api/v0/submittx ` +
             "JSON form of the tranascton: " +
             JSON.stringify(
                 tx.toJson(),

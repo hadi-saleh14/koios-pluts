@@ -51,8 +51,8 @@ export async function getTxStatus( txns: CanBeTxHash | CanBeTxHash[], network: K
 }
 
 const deafultMinConfirm = 20;
-const interval = 5_000;
-const defaultTimeout = 20_000
+const interval = 5_000; // retry every 5 seconds
+const defaultTimeout = 40_000 // 40 seconds ~ 2 blocks
 
 export async function waitTxConfirmed(
     txHash: CanBeTxHash, 
