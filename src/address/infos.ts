@@ -44,7 +44,12 @@ export function getAddressInfos( addrs: AddrLike | AddrLike[], network: KoiosNet
                         new Value([
                             {
                                 policy: new Hash28( entry.policy_id ),
-                                assets: { [entry.asset_name ?? ""]: BigInt( entry.quantity ) }
+                                assets: [
+                                    {
+                                        name: fromHex( entry.name ?? ""),
+                                        quantity: BigInt( entry.quantity )
+                                    }
+                                ]
                             }
                         ])
                     ), 

@@ -1,7 +1,6 @@
-import { CostModels, ProtocolParamters } from "@harmoniclabs/plu-ts";
+import { CostModels, ExBudget, ProtocolParamters } from "@harmoniclabs/plu-ts";
 import { isSafeInteger } from "../utils/isSafeInteger";
 import { getCurrentEpoch } from "../utils/getCurrentEpoch";
-import { ExBudget } from "@harmoniclabs/plu-ts/dist/onchain/CEK/Machine/ExBudget";
 import { KoiosNetwork } from "../types";
 import { netToDom } from "../utils/netToDom";
 
