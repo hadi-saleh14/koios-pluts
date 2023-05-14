@@ -1,8 +1,10 @@
 import { Hash32, Tx } from "@harmoniclabs/plu-ts";
 import { KoiosNetwork, WithNetwork } from "../types";
 import { defineNetwork } from "../utils/defineNetwork";
-import { CanBeTxHash, TxSatatus, getTxStatus, waitTxConfirmed } from "./getTxStatus";
+import { TxSatatus, getTxStatus, waitTxConfirmed } from "./getTxStatus";
 import { submitTx } from "./submit";
+import { CanBeTxHash } from "./CanBeTxHash";
+import { TxUtxosResult, getTxUtxos } from "./getTxUtxos";
 
 export class KoiosTxEndpoionts
     implements WithNetwork
@@ -27,5 +29,10 @@ export class KoiosTxEndpoionts
     status( txns: CanBeTxHash | CanBeTxHash[] ): Promise<TxSatatus[]>
     {
         return getTxStatus( txns, this.network );
+    }
+
+    utxos( txns: CanBeTxHash | CanBeTxHash[] ): Promise<TxUtxosResult[]>
+    {
+        return getTxUtxos( txns, this.network );
     }
 }

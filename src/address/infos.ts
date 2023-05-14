@@ -38,7 +38,7 @@ export function getAddressInfos( addrs: AddrLike | AddrLike[], network: KoiosNet
             const utxos = (res.utxo_set as any[])?.map<UTxO>( (u: any) => {
 
                 const lovelaces = Value.lovelaces( BigInt( u.value ?? 0 ) );
-                const value = (u.asset_list as any[])?.reduce<Value>(
+                const value = (u?.asset_list as any[])?.reduce<Value>(
                     (accum, entry) => Value.add(
                         accum,
                         new Value([
@@ -54,7 +54,7 @@ export function getAddressInfos( addrs: AddrLike | AddrLike[], network: KoiosNet
                         ])
                     ), 
                     lovelaces
-                ) ?? lovelaces
+                ) ?? lovelaces;
 
                 let datum: undefined | Hash32 | Data = undefined
 

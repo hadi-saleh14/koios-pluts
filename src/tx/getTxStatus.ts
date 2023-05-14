@@ -3,19 +3,11 @@ import { KoiosNetwork } from "../types";
 import { netToDom } from "../utils/netToDom";
 import { isSafeInteger } from "../utils/isSafeInteger";
 import { KoiosError } from "../errors";
-
-export type CanBeTxHash = Tx | Hash32 | string
+import { CanBeTxHash, forceHashStr } from "./CanBeTxHash";
 
 export type TxSatatus = {
     txHash: Hash32,
     nConfirmations: number
-}
-
-function forceHashStr( canBe: CanBeTxHash ): string
-{
-    return canBe instanceof Tx ? canBe.hash.toString() :
-        canBe instanceof Hash32 ? canBe.toString() :
-        canBe;
 }
 
 export async function getTxStatus( txns: CanBeTxHash | CanBeTxHash[], network: KoiosNetwork = "mainnet" ): Promise<TxSatatus[]>
@@ -37,7 +29,7 @@ export async function getTxStatus( txns: CanBeTxHash | CanBeTxHash[], network: K
     .then( res =>  {
 
         if( !res.ok )
-        throw new KoiosError("some error requiring tx status")
+        throw new KoiosError("some error requiring tx status: " + res.status + " => " + res.statusText )
 
         return res.json()
     })
