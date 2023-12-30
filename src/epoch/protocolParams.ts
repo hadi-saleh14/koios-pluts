@@ -16,9 +16,9 @@ function withAllValuesAsBigInt( obj: any ): any
     return res;
 }
 
-function adaptKoiosCostModel( str: string ): CostModels
+function adaptKoiosCostModel( str: string | object ): CostModels
 {
-    const { PlutusV1, PlutusV2  } = JSON.parse( str );
+    const { PlutusV1, PlutusV2  } = typeof str === "string" ? JSON.parse( str ) : str;
 
     const res: CostModels = {};
 
