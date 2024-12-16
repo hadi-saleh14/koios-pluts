@@ -18,7 +18,7 @@ export function getAddressInfos( addrs: AddrLike | AddrLike[], network: KoiosNet
         addrs.map( addr => addr.toString() ) : 
         [ addrs.toString() ];
 
-    return fetch(`https://${netToDom(network)}.koios.rest/api/v0/address_info`, {
+    return fetch(`https://${netToDom(network)}.koios.rest/api/v1/address_info`, {
         method: "post",
         headers: {
           'Accept': 'application/json',
