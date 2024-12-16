@@ -16,7 +16,7 @@ export async function getTxStatus( txns: CanBeTxHash | CanBeTxHash[], network: K
         txns.map( forceHashStr ) :
         [ forceHashStr( txns ) ];
 
-    return fetch(`https://${netToDom(network)}.koios.rest/api/v0/tx_status`, {
+    return fetch(`https://${netToDom(network)}.koios.rest/api/v1/tx_status`, {
         method: "post",
         headers: {
           'Accept': 'application/json',
