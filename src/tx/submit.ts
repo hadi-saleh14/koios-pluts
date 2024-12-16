@@ -27,7 +27,7 @@ export async function submitTx( tx: Tx, network: KoiosNetwork = "mainnet" ): Pro
         if( !res.ok )
         throw new KoiosError(
             "error submitting '" + tx.hash.toString() + "' transaction; " +
-            "endpoint used: " + `https://${netToDom(net)}.koios.rest/api/v0/submittx ` +
+            "endpoint used: " + `https://${netToDom(net)}.koios.rest/api/v1/submittx ` +
             "JSON form of the tranascton: " +
             JSON.stringify(
                 tx.toJson(),
