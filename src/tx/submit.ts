@@ -15,7 +15,7 @@ export async function submitTx( tx: Tx, network: KoiosNetwork = "mainnet" ): Pro
         ( network === "preview" ? "preview" : "preprod" ) :
         "mainnet";
 
-    return fetch(`https://${netToDom(net)}.koios.rest/api/v0/submittx`, {
+    return fetch(`https://${netToDom(net)}.koios.rest/api/v1/submittx`, {
         method: "post",
         headers: {
           'Content-Type': 'application/cbor'
