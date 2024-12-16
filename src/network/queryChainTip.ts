@@ -13,7 +13,7 @@ export type KoiosChainTip = {
 
 export function queryChainTip( network: KoiosNetwork = "mainnet" ): Promise<KoiosChainTip>
 {
-    return fetch(`https://${netToDom(network)}.koios.rest/api/v0/tip`)
+    return fetch(`https://${netToDom(network)}.koios.rest/api/v1/tip`)
         .then( res => res.json() )
         .then( (_res) => {
 
