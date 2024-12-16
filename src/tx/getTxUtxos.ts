@@ -19,7 +19,7 @@ export async function getTxUtxos( txns: CanBeTxHash | CanBeTxHash[], network: Ko
         [ forceHashStr( txns ) ];
 
     // tx_utxos endpoint is missing datums and ref scripts
-    return fetch(`https://${netToDom(network)}.koios.rest/api/v0/tx_info`, {
+    return fetch(`https://${netToDom(network)}.koios.rest/api/v1/tx_info`, {
         method: "post",
         headers: {
           'Accept': 'application/json',
