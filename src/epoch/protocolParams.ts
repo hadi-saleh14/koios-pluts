@@ -62,7 +62,7 @@ export function getProtocolParameters( epoch: number = -1, network: KoiosNetwork
         epoch : 
         currEpoch;
 
-    return fetch(`https://${netToDom(network)}.koios.rest/api/v0/epoch_params?_epoch_no=${e.toString()}`)
+    return fetch(`https://${netToDom(network)}.koios.rest/api/v1/epoch_params?_epoch_no=${e.toString()}`)
     .then( res => res.json())
     .then( (_res: any) => {
         const res = _res[0];
